@@ -35,7 +35,7 @@ def capture_image(cap):
     #frame = cv2.flip(frame, 1)
     # Display the captured image
     cv2.imshow("Captured Image", frame)
-
+    time.sleep(3)
     # Save the captured image to a file
     image_path = "captured_image.jpg"
     cv2.imwrite(image_path, frame)
@@ -125,9 +125,14 @@ def main():
     llm_history = []
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
+    use_webcam = False
+    if use_webcam:
+        video_stream = 1
+    else:
+        video_stream = 'data/test.mp4'
 
     while True:
-        cap = cv2.VideoCapture(1)
+        cap = cv2.VideoCapture(video_stream)
         time.sleep(3)
 
         detect_and_record_audio()
