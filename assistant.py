@@ -23,6 +23,8 @@ Interactive Assistant
 
 """
 
+IMG_PATH = 'captured_image.jpg'
+
 def capture_image(cap):
 
     # Read a single frame from the camera
@@ -37,7 +39,7 @@ def capture_image(cap):
     cv2.imshow("Captured Image", frame)
     time.sleep(3)
     # Save the captured image to a file
-    image_path = "captured_image.jpg"
+    image_path = IMG_PATH
     cv2.imwrite(image_path, frame)
 
     print(f"Image saved at {image_path}")
@@ -57,7 +59,8 @@ def assistant(llm_input, cap, llm_history, client):
     # Capture an image of the student's work
     capture_image(cap)
 
-    base64_image = encode_image("captured_image.jpg")
+    img_path = IMG_PATH # 'data/test_img.png'
+    base64_image = encode_image(img_path)
     
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
